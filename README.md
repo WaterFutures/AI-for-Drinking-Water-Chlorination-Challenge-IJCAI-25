@@ -1,10 +1,10 @@
 # 1st AI for Drinking Water Chlorination Challenge @ IJCAI-2025
 
-Please check back later -- the challenge will start at **5th May, 2025**
+Please check back later -- the challenge will start at **6th May, 2025**
 
 ## Timeline
 
-**Competition start:** 5th May, 2025
+**Competition start:** 6th May, 2025
 
 **Submission deadline:** 1st August, 2025
 

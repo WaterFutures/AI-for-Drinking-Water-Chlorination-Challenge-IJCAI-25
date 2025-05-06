@@ -39,8 +39,8 @@ Participants will be provided with a set of scenario configurations/environments
 
 ### Requirements
 
-All requirements are listedt in [REQUIREMETS.txt](REQUIREMETS.txt).
-Please note that EPyT-Control builds on top of [EPyT-Flow](https://github.com/WaterFutures/EPyT-Flow) that comes with pre-compiled shared libraries for running the hydraulic and water quality simulations. In rare cases those might cause compatibility issues -- in those cases, as well as in order to fully make use of your local CPU, you may want to re-compile those libraries as described in the [documentation](hhttps://epyt-flow.readthedocs.io/en/stable/installation.html).
+All requirements are listed in [REQUIREMENTS.txt](REQUIREMENTS.txt).
+Please note that EPyT-Control builds on top of [EPyT-Flow](https://github.com/WaterFutures/EPyT-Flow), which comes with pre-compiled shared libraries for running the hydraulic and water quality simulations. In rare cases those might cause compatibility issues -- in those cases, as well as in order to fully make use of your local CPU, you may want to re-compile those libraries as described in the [documentation](hhttps://epyt-flow.readthedocs.io/en/stable/installation.html).
 
 
 
@@ -50,9 +50,9 @@ Participants have to submit the source code, the trained model, and a short writ
 The written report has to be submitted via the [EasyChair platform](https://easychair.org/conferences?conf=ai4dwc25), and everything else (i.e., source code and the trained model) via the following link as a single .zip file: [Upload-Link](https://u.pcloud.com/#page=puplink&code=sX4XZms5B1cm4FQbpuVCmG9BOy8K0WvR7).
 For the written report, please use the [IJCAI LaTeX template](https://www.ijcai.org/authors_kit) -- note that there is no page limit for the written report.
 
-The submitted Python code must contain a **REQUIREMENTS.txt** file and contain a file **load_my_policy.py** which contains a method
+The submitted Python code must contain a **REQUIREMENTS.txt** file and contain a file **load_my_policy.py**, which contains a method
 `load_policy(env: WaterChlorinationEnv) -> ChlorinationControlPolicy`
-that returns the final controller/policy (i.e., `ChlorinationControlPolicy` instance) .
+that returns the final controller/policy (i.e., `ChlorinationControlPolicy` instance).
 Please see [example-submission](example-submission) folder for an example of how to structure and organize a submission.
 
 The evaluation will be done by the organizing commitee on a secret set of test scenarios where the uncertain parameters will vary within predetermined bounds, to evaluate the generalization -- i.e., a proxy for evaluating the sim-to-real gap. The test scenarios will be made public after the submission deadline.

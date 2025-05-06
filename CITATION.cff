@@ -1,0 +1,45 @@
+cff-version: 1.2.0
+authors:
+  - family-names: Artelt
+    given-names: André
+    orcid: "https://orcid.org/0000-0002-2426-3126"
+  - family-names: Hermes
+    given-names: Luca
+  - family-names: Strotherm
+    given-names: Janine
+  - family-names: Hammer
+    given-names: Barbara
+  - family-names: Vrachimis
+    given-names: Stelios G.
+  - family-names: Eliades
+    given-names: Demetrios G.
+  - family-names: Polycarpou
+    given-names: Marios M.
+  - family-names: Paraskevopoulos
+    given-names: Sotiris
+  - family-names: Vrochidis
+    given-names: Stefanos
+  - family-names: Taormina
+    given-names: Riccardo
+  - family-names: Savic
+    given-names: Dragan
+  - family-names: Koundouri
+    given-names: Phoebe
+contact:
+  - family-names: Artelt
+    given-names: André
+    orcid: "https://orcid.org/0000-0002-2426-3126"
+message: "If you use material from this competition, please cite it using these metadata."
+title: "1st AI for Drinking Water Chlorination Challenge @ IJCAI-2025"
+keywords:
+  - python
+  - simulation
+  - water
+  - epanet
+  - epanet-python-toolkit
+  - control
+  - reinforcement learning
+  - benchmark
+  - competition
+license: MIT
+repository-code: "https://github.com/WaterFutures/AI-for-Drinking-Water-Chlorination-Challenge-IJCAI-25"

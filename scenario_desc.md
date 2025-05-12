@@ -24,7 +24,6 @@ Water flows from the reservoir into the network, through the pipes, and eventual
 ## Your Control Levers: Booster Stations
 You can control six chlorine injection pumps, located at:
 
-- `WTP`
 - `dist423`
 - `dist225`
 - `dist989`

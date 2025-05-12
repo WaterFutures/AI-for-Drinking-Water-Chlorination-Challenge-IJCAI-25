@@ -2,7 +2,7 @@
 
 This challenge is about controlling the chlorination for mitigating and reacting to wastewater contamination events and other time-varying dynamics in a water distribution system simulation.
 
-*The task is to control the injection of chlorine (Cl) at 6 locations, based on the readings of a few strategically placed hydraulic and chlorine sensors only.*
+*The task is to control the injection of chlorine (Cl) at 5 locations, based on the readings of a few strategically placed hydraulic and chlorine sensors only.*
 
 Background information about the task and the scenario is provided [here](scenario_desc.md), while general information on water distribution systems and their dynamics can be found [here](<Introduction WDNs, Hydraulics and Quality.md>).
 

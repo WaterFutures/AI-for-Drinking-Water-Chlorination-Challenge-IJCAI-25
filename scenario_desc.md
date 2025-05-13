@@ -97,4 +97,7 @@ Each event:
 - Injects pathogens and extra organic matter into the system.
 
 Your control policy won’t know when or where these happen.
-Your goal is to maintain chlorine ≥ 0.2 mg/L but <= 0.4 mg/L throughout the network — this ensures pathogens are neutralized as much as possible before reaching consumers while not exposing the consumer to too much chlorine, which is known to be poisonous.
+
+Your goal is to maintain chlorine concentration  ≥ 0.2 mg/L but <= 0.4 mg/L throughout the network. 
+
+This concentration is critical to effectively neutralize pathogens, ensuring that water remains microbiologically safe for consumers. At the same time, maintaining chlorine levels below 0.4 mg/L minimizes the risk of adverse effects, such as unpleasant taste and odor, while also reducing the formation of potentially harmful chlorine by-products, such as trihalomethanes (THMs) and haloacetic acids (HAAs).

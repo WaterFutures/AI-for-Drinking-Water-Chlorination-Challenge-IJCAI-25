@@ -46,7 +46,7 @@ Please note that EPyT-Control builds on top of [EPyT-Flow](https://github.com/Wa
 
 The provided environments are derived from the [WaterChlorinationEnv](env.py) class, which mimics the [Gymnasium Environment](https://gymnasium.farama.org/api/env/) interface. Note that the `WaterChlorinationEnv` class is an instantiation of [EpanetMsxControlEnv](https://epyt-control.readthedocs.io/en/stable/epyt_control.envs.html#epyt_control.envs.advanced_quality_control_env.EpanetMsxControlEnv) from the [EPyT-Control package](https://github.com/WaterFutures/EPyT-Control).
 
-The environment has to be initialized with a scenario configuration, which can be loaded using the `load_scenario()` function from the [scenarios.py](scenarios.py) file -- note that you have to specify the ID of the scenario. We provide a total of three 6-day long scenarios for facilitating the training of ML-based methods -- note that all scenarios are for the same water network (same sensors and chlorine injection pumps) but with different (randomized) contamination events.
+The environment has to be initialized with a scenario configuration, which can be loaded using the `load_scenario()` function from the [scenarios.py](scenarios.py) file -- note that you have to specify the ID of the scenario. We provide a total of five 6-day long scenarios for facilitating the training of ML-based methods -- note that all scenarios are for the same water network (same sensors and chlorine injection pumps) but with different (randomized) contamination events.
 Later on (2nd June), we will provide more 6-day long scenarios as well as a $365$ day long scenario. You can assume that the secret test scenario will be of the same form -- i.e., $365$ days long, same network, and same sensors and chlorine injection pumps.
 
 Usage:
@@ -141,10 +141,10 @@ Participants are invited to present their results in the on-site session at IJCA
 André Artelt -- aartelt@techfak.uni-bielefeld.de
 
 ### Organizing Committee
-- André Artelt *-- Bieleld University, Germany*
-- Luca Hermes *-- Bieleld University, Germany*
-- Janine Strotherm *-- Bieleld University, Germany*
-- Barbara Hammer *-- Bieleld University, Germany*
+- André Artelt *-- Bielefeld University, Germany*
+- Luca Hermes *-- Bielefeld University, Germany*
+- Janine Strotherm *-- Bielefeld University, Germany*
+- Barbara Hammer *-- Bielefeld University, Germany*
 - Stelios G. Vrachimis *-- University of Cyprus, Cyprus*
 - Marios S. Kyriakou *-- University of Cyprus, Cyprus*
 - Demetrios G. Eliades *-- University of Cyprus, Cyprus*

@@ -14,7 +14,7 @@ def load_scenario(scenario_id: int) -> dict:
     Parameters
     ----------
     scenario_id : `int`
-        ID of the scenario. Can range from 0 to 3.
+        ID of the scenario. Can range from 0 to 4.
 
     Returns
     -------
@@ -23,7 +23,7 @@ def load_scenario(scenario_id: int) -> dict:
     """
     if not isinstance(scenario_id, int):
         raise TypeError("'scenario_id' must be an instance of 'int'")
-    if scenario_id < 0 or scenario_id >= 3:
+    if scenario_id < 0 or scenario_id >= 5:
         raise ValueError(f"Invalid sceanrio ID '{scenario_id}'")
 
     f_inp_in = f"CY-DBP_competition_stream_competition_6days_{scenario_id}.inp"

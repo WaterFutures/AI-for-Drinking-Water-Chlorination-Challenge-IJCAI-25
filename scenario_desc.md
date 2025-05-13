@@ -33,6 +33,8 @@ You can control six chlorine injection pumps, located at:
 Each booster can inject from 0 up to $10000$ mg/L of chlorine.
 Your control policy decides the injection amount every 5 minutes.
 
+![Chlorine booster stations](Figures/booster_stations.png)
+
 
 ## Sensor Data
 To make decisions, your control policy receives the following inputs:
@@ -60,6 +62,9 @@ To make decisions, your control policy receives the following inputs:
     - `p-1144`
 
 This setup mimics real-life conditions, where sensors are only available at selected locations.
+
+![Chlorine sensor nodes](Figures/sensor_nodes.png)
+
 
 ## Simulation Details
 The simulation covers, depending on the sceanrio, either six days or one full year, at a resolution of 5 minutes per step.

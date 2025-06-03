@@ -22,7 +22,7 @@ Water flows from the reservoir into the network, through the pipes, and eventual
 ![The Water Distribution Network](Figures/cydbp.png)
 
 ## Your Control Levers: Booster Stations
-You can control six chlorine injection pumps, located at:
+You can control five chlorine injection pumps, located at:
 
 - `dist423`
 - `dist225`

@@ -83,7 +83,7 @@ The provided `WaterChlorinationEnv` class comes with a simple reward function im
 
 ### Interface for policies/controllers
 
-For the final submission, but also in order to be able to run the implemented evaluation metrics, all policies/controllers must be instances of [ChlorinationControlPolicy](control_policy.py). Here, the abstract method `compute_action()` must be overridden. This method maps the sensor readings ($7$ dimensional NumPy array) to actions ($5$ dimensional NumPy array), i.e., injection rate of Chlorine for each of the three injection pumps.
+For the final submission, but also in order to be able to run the implemented evaluation metrics, all policies/controllers must be instances of [ChlorinationControlPolicy](control_policy.py). Here, the abstract method `compute_action()` must be overridden. This method maps the sensor readings ($19$ dimensional NumPy array) to actions ($5$ dimensional NumPy array), i.e., injection rate of Chlorine for each of the three injection pumps.
 
 Example of a random policy:
 ```python

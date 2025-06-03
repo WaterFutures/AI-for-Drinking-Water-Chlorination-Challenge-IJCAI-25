@@ -11,10 +11,13 @@ def load_scenario(scenario_id: int) -> dict:
     Creates and returns the scenario configurations which can be passed to the
     `WaterChlorinationEnv` class.
 
+    Note that the first 10 scenarios (IDs 0 - 9) are 6 days long and
+    the 11th scenario (ID 10) is 365 days long.
+
     Parameters
     ----------
     scenario_id : `int`
-        ID of the scenario. Can range from 0 to 4.
+        ID of the scenario. Can range from 0 to 10.
 
     Returns
     -------
@@ -23,12 +26,19 @@ def load_scenario(scenario_id: int) -> dict:
     """
     if not isinstance(scenario_id, int):
         raise TypeError("'scenario_id' must be an instance of 'int'")
-    if scenario_id < 0 or scenario_id >= 5:
+    if scenario_id < 0 or scenario_id >= 11:
         raise ValueError(f"Invalid sceanrio ID '{scenario_id}'")
 
-    f_inp_in = f"CY-DBP_competition_stream_competition_6days_{scenario_id}.inp"
-    f_msx_in = f"AI_challenge6days_{scenario_id}.msx"
-    f_in_contamination_metadata = f"contamination_metadata_6days_{scenario_id}.mat"
+    if scenario_id <= 9:
+        f_inp_in = f"CY-DBP_competition_stream_competition_6days_{scenario_id}.inp"
+        f_msx_in = f"AI_challenge6days_{scenario_id}.msx"
+        f_in_contamination_metadata = f"contamination_metadata_6days_{scenario_id}.mat"
+        f_in_streams_data = f"Stream_demands_competition_6days_{scenario_id}.mat"
+    else:
+        f_inp_in = "CY-DBP_competition_stream_competition_365days.inp"
+        f_msx_in = "AI_challenge365days.msx"
+        f_in_contamination_metadata = "contamination_metadata_365days.mat"
+        f_in_streams_data = "Stream_demands_competition_365days.mat"
 
     sensor_config = None
     with ScenarioSimulator(f_inp_in=f_inp_in, f_msx_in=f_msx_in) as scenario:
@@ -50,4 +60,5 @@ def load_scenario(scenario_id: int) -> dict:
                                                     upper_bound=10000.)
                                                     for node_id, pat_id in zip(cl_injection_nodes,
                                                                                cl_injection_patterns)],
-            "f_in_contamination_metadata": f_in_contamination_metadata}
+            "f_in_contamination_metadata": f_in_contamination_metadata,
+            "f_in_streams_data": f_in_streams_data}

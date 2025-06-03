@@ -1,9 +1,9 @@
 # Evaluation Procedure
 
 Water chlorination control constitutes a complex multi-objective optimization problem.
-Consequently, submitted control strategies/policies are evaluated with respect to different criteria.
+Consequently, submitted control strategies/policies are evaluated with respect to different criteria (all to be minimized).
 Submissions will be ranked according to their performance on those individual aspects for
-each test scenario, as well as a global ranking where all aspects and criteria are considered.
+each test scenario, as well as a global ranking where all aspects and criteria are considered (uniform weighting).
 
 In order to assess how well the submitted methods generalize (i.e., evaluate the sim-to-real gap),
 the evaluation is done on a secret set of test scenarios, where some of those test scenarios feature
@@ -29,17 +29,6 @@ $$
 
 In this challenge, we use $[0.2, 0.4]\text{mg/l}$ as desired chlorine concentration bounds.
 
-## Infection Risk
-
-The infection risk is an evaluation metric that quantifies the public health impact by estimating the probability of an individual getting ill after exposure to pathogens during a contamination event. Following the Quantitative Microbial Risk Assessment (QMRA) framework, it combines the pathogen concentration, the water consumption behavior, and finally dose-response modeling. The dose for each individual is calculated by multiplying the pathogen concentration in drinking water by the ingested volume across multiple daily consumption events, totaling up to 1 liter per person per day. For enterovirus, the infection probability is derived using an exponential dose-response model: 
-
-$$
-Risk = 1 - \exp(-r * Dose)
-$$
-
-with $r = 0.014472$ representing the pathogen-specific infectivity. The infection risk is then defined as the ratio of expected infections to the total population. This metric evaluates how well the controller prevents (or minimizes) health risks during an (undetected) contamination event.
-
-Note that in contrast to the other evaluation metrics, the infection risk is computed for each contamination event only.
 
 ## Fairness
 
@@ -52,6 +41,20 @@ $$
 where $s_i$ refers to the quantity of interest at junction $i$ -- i.e., either the violations of chlorine concentration bounds or the infection risk.
 
 By this, we evaluate some form of fairness where we evaluate the worst-case of how different all junctions (i.e., consumers) or contamination event locations are treated.
+
+
+## Infection Risk
+
+The infection risk is an evaluation metric that quantifies the public health impact by estimating the probability of an individual getting ill after exposure to pathogens during a contamination event. Following the Quantitative Microbial Risk Assessment (QMRA) framework, it combines the pathogen concentration, the water consumption behavior, and finally dose-response modeling. The dose for each individual is calculated by multiplying the pathogen concentration in drinking water by the ingested volume across multiple daily consumption events, totaling up to 1 liter per person per day. For enterovirus, the infection probability is derived using an exponential dose-response model: 
+
+$$
+Risk = 1 - \exp(-r * Dose)
+$$
+
+with $r = 0.014472$ representing the pathogen-specific infectivity. The infection risk is then defined as the ratio of expected infections to the total population. This metric evaluates how well the controller prevents (or minimizes) health risks during an (undetected) contamination event.
+
+Note that in contrast to the other evaluation metrics, the infection risk is computed for each contamination event only.
+
 
 ## Smoothness of Chlorine Injection
 
@@ -68,6 +71,7 @@ In this challenge, we have two chlorine injection pumps, $v_1$ and $v_2$. Conseq
 $$
 \underset{v1, v2}{\max}\, \frac{1}{T-1}\sum_{t=1}^{T-1} |u_v(t) - u_v(t+1)|
 $$
+
 
 ## Cost of Control
 

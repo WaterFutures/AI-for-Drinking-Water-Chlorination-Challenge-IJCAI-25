@@ -1,10 +1,15 @@
 # 1st AI for Drinking Water Chlorination Challenge @ IJCAI-2025
 
-This challenge is about controlling the chlorination for mitigating and reacting to wastewater contamination events and other time-varying dynamics in a water distribution system simulation.
+This challenge is about controlling the chlorination for mitigating and reacting to wastewater contamination events and other time-varying dynamics in a water distribution system simulation. Note that Chlorine is added to water distribution systems primarily as a disinfectant to kill harmful bacteria, viruses, and other pathogens, ensuring safe drinking water.
 
 *The task is to control the injection of chlorine (Cl) at 5 locations, based on the readings of a few strategically placed hydraulic and chlorine sensors only.*
 
 Background information about the task and the scenario is provided [here](scenario_desc.md), while general information on water distribution systems and their dynamics can be found [here](<Introduction WDNs, Hydraulics and Quality.md>).
+
+## Update 2nd June
+
+- Release of five additional $6$-day long scenarios
+- Implementation of the infection risk metric (see [evaluation.py](evaluation.py))
 
 ## Timeline
 
@@ -12,7 +17,7 @@ Background information about the task and the scenario is provided [here](scenar
 
 **Release of first scenarios:** 12th May, 2025 &#10004;
 
-**Release of additional scenarios:** 2nd June, 2025
+**Release of additional scenarios:** 2nd June, 2025 &#10004;
 
 **Submission deadline:** 1st August, 2025
 
@@ -22,7 +27,7 @@ Background information about the task and the scenario is provided [here](scenar
 
 ## Evaluation
 
-Submissions will be evaluated on the following metrics:
+Submissions will be evaluated on the following metrics (all to be minimized):
 - Total amount of injected chlorine -- i.e., control cost.
 - Satisfaction of chlorine injection pump operation constraints, such as maximum injection and injection rate of change.
 - Local satisfaction of pre-defined chlorine concentration bounds.
@@ -30,6 +35,7 @@ Submissions will be evaluated on the following metrics:
 - Spatial variations of the two aforementioned metrics, evaluating a particular notion of fairness.
 
 Submissions will be ranked according to their performance on those individual aspects for each test scenario, as well as a global ranking where all aspects and criteria are considered.
+The top-performing teams will receive a certificate.
 
 More details about the evaluation metrics can be found [here](evaluation.md).
 
@@ -46,8 +52,9 @@ Please note that EPyT-Control builds on top of [EPyT-Flow](https://github.com/Wa
 
 The provided environments are derived from the [WaterChlorinationEnv](env.py) class, which mimics the [Gymnasium Environment](https://gymnasium.farama.org/api/env/) interface. Note that the `WaterChlorinationEnv` class is an instantiation of [EpanetMsxControlEnv](https://epyt-control.readthedocs.io/en/stable/epyt_control.envs.html#epyt_control.envs.advanced_quality_control_env.EpanetMsxControlEnv) from the [EPyT-Control package](https://github.com/WaterFutures/EPyT-Control).
 
-The environment has to be initialized with a scenario configuration, which can be loaded using the `load_scenario()` function from the [scenarios.py](scenarios.py) file -- note that you have to specify the ID of the scenario. We provide a total of five 6-day long scenarios for facilitating the training of ML-based methods -- note that all scenarios are for the same water network (same sensors and chlorine injection pumps) but with different (randomized) contamination events.
-Later on (2nd June), we will provide more 6-day long scenarios as well as a $365$ day long scenario. You can assume that the secret test scenario will be of the same form -- i.e., $365$ days long, same network, and same sensors and chlorine injection pumps.
+The environment has to be initialized with a scenario configuration, which can be loaded using the `load_scenario()` function from the [scenarios.py](scenarios.py) file -- note that you have to specify the ID of the scenario. We provide a total of **ten** $6$-day long scenarios for facilitating the training of ML-based methods -- note that all scenarios are for the same water network (same sensors and chlorine injection pumps) but with different (randomized) contamination events.
+Furthermore, soon we will release an $11$th scenario available, which is $365$ days long. You can assume that the secret test scenario will be of the same form -- i.e., $365$ days long, same network, and same sensors and chlorine injection pumps.
+Note that the simulation of the $365$-day long scenario takes a considerable amount of time. We recommend to start with the $6$-day long scenarios.
 
 Usage:
 
@@ -105,7 +112,7 @@ with WaterChlorinationEnv(**load_scenario(scenario_id=0)) as env:
             break
 ``` 
 
-Some evaluation metrics are already implemented in the function `evaluate()` in the file [evaluation.py](evaluation.py):
+All evaluation metrics are already implemented in the function `evaluate()` in the file [evaluation.py](evaluation.py):
 ```python
 # Create and fit policy
 my_policy = ...

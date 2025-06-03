@@ -15,13 +15,14 @@ class WaterChlorinationEnv(EpanetMsxControlEnv):
     Control environment.
     """
     def __init__(self, scenario_config: ScenarioConfig, f_in_contamination_metadata: str,
-                 action_space: list[SpeciesInjectionAction]):
+                 f_in_streams_data: str, action_space: list[SpeciesInjectionAction]):
         super().__init__(scenario_config=scenario_config,
                          action_space=action_space,
                          rerun_hydraulics_when_reset=False)
 
         self.__sensor_config_reward = None
         self._f_in_contamination_metadata = f_in_contamination_metadata
+        self._f_in_streams_data = f_in_streams_data
 
     def reset(self, seed: Optional[int] = None, options: Optional[dict[str, Any]] = None
               ) -> tuple[np.ndarray, dict]:

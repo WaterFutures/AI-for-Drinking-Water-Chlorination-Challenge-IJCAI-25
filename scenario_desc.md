@@ -30,7 +30,7 @@ You can control five chlorine injection pumps, located at:
 - `dist1283`
 - `dist1931`
 
-Each booster can inject from 0 up to $10000$ mg/L of chlorine.
+Each booster can inject from 0 up to $10000$ mg/minute of chlorine.
 Your control policy decides the injection amount every 5 minutes.
 
 ![Chlorine booster stations](Figures/booster_stations.png)

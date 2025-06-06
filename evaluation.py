@@ -102,9 +102,10 @@ def evaluate(policy: ChlorinationControlPolicy, env: WaterChlorinationEnv) -> di
         s.append(np.abs(actions[t] - actions[t+1]))
     s = np.mean(s, axis=0)
 
-    r["injection_control_score"] = max(s)
+    r["injection_smoothness_score"] = max(s)
 
     # Infection risk
+    r["infection_risk"] = []
     msx_mat = scipy.io.loadmat(env._f_in_contamination_metadata)
     streams_mat = scipy.io.loadmat(env._f_in_streams_data)
 
@@ -125,57 +126,65 @@ def evaluate(policy: ChlorinationControlPolicy, env: WaterChlorinationEnv) -> di
     Total_Infections_day = None
     Total_risk_of_infection = None
 
-    event_start = int(msx_mat["event_start"].flatten())
-    aligned_start = max(1, event_start - 1) - 1  # Start one timestep before contamination
-    aligned_end = min(aligned_start + steps_per_day - 1, Stream_faucet.shape[0]) + 1 # 288 steps total
+    # Loop over allevents
+    start_times = []
+    if "event_map" in msx_mat.keys():
+        for i in range(len(msx_mat["event_map"][0])):
+            start_times.append(int(msx_mat["event_map"][0][i][0]))
+    else:
+        start_times = [int(msx_mat["event_start"].flatten())]
 
-    Stream_tap = np.round(Stream_faucet[aligned_start:aligned_end, :])
-    cont_matrix = Pathogen_concentration[aligned_start - 3 * steps_per_day : aligned_end - 3 * steps_per_day, :] # We skipped the first three days
+    for event_start in start_times:
+        aligned_start = max(1, event_start - 1) - 1  # Start one timestep before contamination
+        aligned_end = min(aligned_start + steps_per_day - 1, Stream_faucet.shape[0]) + 1 # 288 steps total
 
-    stream_tot = np.sum(Stream_tap, axis=0)
-    fraction = np.divide(People_per_node, stream_tot)
-    Consumed_Stream = np.multiply(Stream_tap,  fraction)
+        Stream_tap = np.round(Stream_faucet[aligned_start:aligned_end, :])
+        cont_matrix = Pathogen_concentration[aligned_start - 3 * steps_per_day : aligned_end - 3 * steps_per_day, :] # We skipped the first three days
 
-    Volume = [None] * numJunctions
-    for m in range(numJunctions):
-        Volume[m] = np.zeros((Stream_tap.shape[0], int(People_per_node[m])))
-        for n in range(int(People_per_node[m])):
-            for t in range(Stream_tap.shape[0]):
-                while Consumed_Stream[t, m] > 0:
-                    if Consumed_Stream[t, m] < 0.00001:
-                        break
-                    if sum(Volume[m][:, n]) < 1:
-                        delta = min([0.25, 1 - sum(Volume[m][:, n]), Consumed_Stream[t, m]])
-                        Volume[m][t, n] = Volume[m][t, n] + delta
-                        Consumed_Stream[t, m] = Consumed_Stream[t, m] - delta
+        stream_tot = np.sum(Stream_tap, axis=0)
+        fraction = np.divide(People_per_node, stream_tot)
+        Consumed_Stream = np.multiply(Stream_tap,  fraction)
 
-                    n = n + 1
-                    n = n % int(People_per_node[m])
+        Volume = [None] * numJunctions
+        for m in range(numJunctions):
+            Volume[m] = np.zeros((Stream_tap.shape[0], int(People_per_node[m])))
+            for n in range(int(People_per_node[m])):
+                for t in range(Stream_tap.shape[0]):
+                    while Consumed_Stream[t, m] > 0:
+                        if Consumed_Stream[t, m] < 0.00001:
+                            break
+                        if sum(Volume[m][:, n]) < 1:
+                            delta = min([0.25, 1 - sum(Volume[m][:, n]), Consumed_Stream[t, m]])
+                            Volume[m][t, n] = Volume[m][t, n] + delta
+                            Consumed_Stream[t, m] = Consumed_Stream[t, m] - delta
 
-    Dose = [None] * numJunctions
-    Risk = [None] * numJunctions
-    Total_risk_per_person = [None] * numJunctions
-    Total_infections_ts = np.zeros((numJunctions, steps_per_day))
+                        n = n + 1
+                        n = n % int(People_per_node[m])
 
-    for m in range(numJunctions):
-        Dose[m] = np.multiply(Volume[m], cont_matrix[:, m].reshape(-1, 1))
-        Risk[m] = 1. - np.exp(-r_entero * Dose[m])
+        Dose = [None] * numJunctions
+        Risk = [None] * numJunctions
+        Total_risk_per_person = [None] * numJunctions
+        Total_infections_ts = np.zeros((numJunctions, steps_per_day))
 
-        Total_risk_per_person[m] = [None for _ in range(int(People_per_node[m]))]
-        for p in range(int(People_per_node[m])):
-            Total_risk_per_person[m][p] = 1 - np.prod(1 - Risk[m][:, p])
-        if np.all(Risk[m] == 0):
-            continue
+        for m in range(numJunctions):
+            Dose[m] = np.multiply(Volume[m], cont_matrix[:, m].reshape(-1, 1))
+            Risk[m] = 1. - np.exp(-r_entero * Dose[m])
 
-        cum_risk = np.zeros(Risk[m].shape)
-        cum_risk[:, 0] = Risk[m][:, 0]
-        for t in range(1, steps_per_day):
+            Total_risk_per_person[m] = [None for _ in range(int(People_per_node[m]))]
             for p in range(int(People_per_node[m])):
-                cum_risk[t, p] = 1 - (1 - cum_risk[t - 1, p]) * (1 - Risk[m][t, p])
-        Total_infections_ts[m, :] = np.sum(cum_risk, axis=1).T
+                Total_risk_per_person[m][p] = 1 - np.prod(1 - Risk[m][:, p])
+            if np.all(Risk[m] == 0):
+                continue
 
-    Total_Infections_day = np.sum([np.sum(item) for item in Total_risk_per_person])
-    Total_risk_of_infection = (Total_Infections_day / np.sum(People_per_node)) * 100
-    r["infection_risk"] = Total_risk_of_infection
+            cum_risk = np.zeros(Risk[m].shape)
+            cum_risk[:, 0] = Risk[m][:, 0]
+            for t in range(1, steps_per_day):
+                for p in range(int(People_per_node[m])):
+                    cum_risk[t, p] = 1 - (1 - cum_risk[t - 1, p]) * (1 - Risk[m][t, p])
+            Total_infections_ts[m, :] = np.sum(cum_risk, axis=1).T
+
+        Total_Infections_day = np.sum([np.sum(item) for item in Total_risk_per_person])
+        Total_risk_of_infection = (Total_Infections_day / np.sum(People_per_node)) * 100
+        r["infection_risk"].append(Total_risk_of_infection)
 
     return r

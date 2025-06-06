@@ -6,9 +6,15 @@ This challenge is about controlling the chlorination for mitigating and reacting
 
 Background information about the task and the scenario is provided [here](scenario_desc.md), while general information on water distribution systems and their dynamics can be found [here](<Introduction WDNs, Hydraulics and Quality.md>).
 
+## Update 6th June
+
+- Release of a $365$-day long scenario.
+
+> **_NOTE:_** The $365$-day long scenario is quite large and is therefore handled by [Git LFS](https://git-lfs.com/). Alternatively, if you do not want to install [Git LFS](https://git-lfs.com/), you can download the release of this repository, which contains all files (incl. the large ones).
+
 ## Update 2nd June
 
-- Release of five additional $6$-day long scenarios
+- Release of five additional $6$-day long scenarios.
 - Implementation of the infection risk metric (see [evaluation.py](evaluation.py))
 
 ## Timeline
@@ -26,6 +32,8 @@ Background information about the task and the scenario is provided [here](scenar
 **Presentation of results at IJCAI 2025:** Montreal, 16th -- 22nd August, 2025
 
 ## Evaluation
+
+The evaluation will be done on a secrete $365$ days long scenario, similar to the one already provided. You can assume that the secret test scenario will be of the same form -- i.e., $365$ days long, same network, and same sensors and chlorine injection pumps. However, there will be slightly different water demands, slight changes in the TOC concentrations, and random contamination events.
 
 Submissions will be evaluated on the following metrics (all to be minimized):
 - Total amount of injected chlorine -- i.e., control cost.
@@ -53,7 +61,7 @@ Please note that EPyT-Control builds on top of [EPyT-Flow](https://github.com/Wa
 The provided environments are derived from the [WaterChlorinationEnv](env.py) class, which mimics the [Gymnasium Environment](https://gymnasium.farama.org/api/env/) interface. Note that the `WaterChlorinationEnv` class is an instantiation of [EpanetMsxControlEnv](https://epyt-control.readthedocs.io/en/stable/epyt_control.envs.html#epyt_control.envs.advanced_quality_control_env.EpanetMsxControlEnv) from the [EPyT-Control package](https://github.com/WaterFutures/EPyT-Control).
 
 The environment has to be initialized with a scenario configuration, which can be loaded using the `load_scenario()` function from the [scenarios.py](scenarios.py) file -- note that you have to specify the ID of the scenario. We provide a total of **ten** $6$-day long scenarios for facilitating the training of ML-based methods -- note that all scenarios are for the same water network (same sensors and chlorine injection pumps) but with different (randomized) contamination events.
-Furthermore, soon we will release an $11$th scenario available, which is $365$ days long. You can assume that the secret test scenario will be of the same form -- i.e., $365$ days long, same network, and same sensors and chlorine injection pumps.
+Furthermore, there is also an $11th$ scenario available, which is $365$ days long. You can assume that the secret test scenario will be of the same form -- i.e., $365$ days long, same network, and same sensors and chlorine injection pumps.
 Note that the simulation of the $365$-day long scenario takes a considerable amount of time. We recommend to start with the $6$-day long scenarios.
 
 Usage:
@@ -176,7 +184,7 @@ Artelt, A., Hermes, L., Strotherm, J., Hammer, B., Vrachimis, S. G., Kyriakou, M
 Alternatively, you may use the following BibTex entry:
 ```
 @misc{github:ai4drinkwaterchlorinationchallenge25,
-        author = {André Artelt, Luca Hermes, Janine Strotherm, Barbara Hammer, Stelios G. Vrachimis, Marios S. Kyriakou, Demetrios G. Eliades, Marios M. Polycarpou, Sotirios Paraskevopoulos, Stefanos Vrochidis, Riccardo Taormina, Dragan Savic, Phoebe Koundouri},
+        author = {André Artelt and Luca Hermes, Janine Strotherm and Barbara Hammer and Stelios G. Vrachimis and Marios S. Kyriakou, Demetrios G. Eliades and Marios M. Polycarpou and Sotirios Paraskevopoulos and Stefanos Vrochidis and Riccardo Taormina and Dragan Savic and Phoebe Koundouri},
         title = {{1st AI for Drinking Water Chlorination Challenge}},
         year = {2025},
         publisher = {34th International Joint Conference on Artificial Intelligence (IJCAI)}

@@ -6,6 +6,8 @@ This challenge is about controlling the chlorination for mitigating and reacting
 
 Background information about the task and the scenario is provided [here](scenario_desc.md), while general information on water distribution systems and their dynamics can be found [here](<Introduction WDNs, Hydraulics and Quality.md>).
 
+You can find a set of frequently asked questions [here](faq.md).
+
 ## Update 6th June
 
 - Release of a $365$-day long scenario.

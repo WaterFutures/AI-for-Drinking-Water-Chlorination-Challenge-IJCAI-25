@@ -8,7 +8,13 @@ Background information about the task and the scenario is provided [here](scenar
 
 You can find a set of frequently asked questions [here](faq.md).
 
-## Update 6th June
+## Update 19th July
+
+- Deadline extended to **4th August**
+
+- `load_scenario()` uses pre-computed hydraulic dynamics to speed up the entire simulation
+
+## Update 5th June
 
 - Release of a $365$-day long scenario.
 
@@ -27,9 +33,9 @@ You can find a set of frequently asked questions [here](faq.md).
 
 **Release of additional scenarios:** 2nd June, 2025 &#10004;
 
-**Submission deadline:** 1st August, 2025
+**Submission deadline:** 4th August, 2025
 
-**Notification of results and publication of test set:** 8th August, 2025
+**Notification of results and publication of test set:** 11th August, 2025
 
 **Presentation of results at IJCAI 2025:** Montreal, 16th -- 22nd August, 2025
 
@@ -65,6 +71,8 @@ The provided environments are derived from the [WaterChlorinationEnv](env.py) cl
 The environment has to be initialized with a scenario configuration, which can be loaded using the `load_scenario()` function from the [scenarios.py](scenarios.py) file -- note that you have to specify the ID of the scenario. We provide a total of **ten** $6$-day long scenarios for facilitating the training of ML-based methods -- note that all scenarios are for the same water network (same sensors and chlorine injection pumps) but with different (randomized) contamination events.
 Furthermore, there is also an $11th$ scenario available, which is $365$ days long. You can assume that the secret test scenario will be of the same form -- i.e., $365$ days long, same network, and same sensors and chlorine injection pumps.
 Note that the simulation of the $365$-day long scenario takes a considerable amount of time. We recommend to start with the $6$-day long scenarios.
+
+In order to speed up things, `load_scenario()` uses on pre-computed hydraulic dynamics that are first downloaded if not already present in this folder. Users can decide not to use those by setting the parameter `use_precomputed_hydraulics=True` in the `load_scenario()` function -- in this case, the hydraulics are computed first before the user can start interacting with the environment.
 
 Usage:
 

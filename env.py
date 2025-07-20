@@ -15,10 +15,13 @@ class WaterChlorinationEnv(EpanetMsxControlEnv):
     Control environment.
     """
     def __init__(self, scenario_config: ScenarioConfig, f_in_contamination_metadata: str,
-                 f_in_streams_data: str, action_space: list[SpeciesInjectionAction]):
+                 f_in_streams_data: str, action_space: list[SpeciesInjectionAction],
+                 f_hyd_file_in: str = None, hyd_scada_in: ScadaData = None):
         super().__init__(scenario_config=scenario_config,
                          action_space=action_space,
-                         rerun_hydraulics_when_reset=False)
+                         rerun_hydraulics_when_reset=False,
+                         hyd_file_in=f_hyd_file_in, hyd_scada_in=hyd_scada_in,
+                         reload_scenario_when_reset=False)
 
         self.__sensor_config_reward = None
         self._f_in_contamination_metadata = f_in_contamination_metadata

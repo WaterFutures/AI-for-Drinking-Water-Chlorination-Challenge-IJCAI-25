@@ -8,6 +8,11 @@ Background information about the task and the scenario is provided [here](scenar
 
 You can find a set of frequently asked questions [here](faq.md).
 
+## Update 30th July
+
+- Specify time zone on deadline (it is AoE)
+- Downgrade a dependency which seems to cause problems on Windows -- please use epyt==1.2.2 if you are working on Windows.
+
 ## Update 19th July
 
 - Deadline extended to **4th August**
@@ -27,6 +32,8 @@ You can find a set of frequently asked questions [here](faq.md).
 
 ## Timeline
 
+All deadlines are AoE.
+
 **Competition meta data release:** 6th May, 2025 &#10004;
 
 **Release of first scenarios:** 12th May, 2025 &#10004;
@@ -38,6 +45,7 @@ You can find a set of frequently asked questions [here](faq.md).
 **Notification of results and publication of test set:** 11th August, 2025
 
 **Presentation of results at IJCAI 2025:** Montreal, 16th -- 22nd August, 2025
+
 
 ## Evaluation
 

@@ -8,6 +8,10 @@ Background information about the task and the scenario is provided [here](scenar
 
 You can find a set of frequently asked questions [here](faq.md).
 
+## Results
+
+Evaluations are running -- the results will be published as soon as possible.
+
 ## Update 30th July
 
 - Specify time zone on deadline (it is AoE)
@@ -40,7 +44,7 @@ All deadlines are AoE.
 
 **Release of additional scenarios:** 2nd June, 2025 &#10004;
 
-**Submission deadline:** 4th August, 2025
+**Submission deadline:** 4th August, 2025 &#10004;
 
 **Notification of results and publication of test set:** 11th August, 2025
 

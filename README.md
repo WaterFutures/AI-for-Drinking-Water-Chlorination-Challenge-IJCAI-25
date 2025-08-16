@@ -10,7 +10,60 @@ You can find a set of frequently asked questions [here](faq.md).
 
 ## Results
 
-Evaluations are running -- the results will be published as soon as possible.
+
+The results per team are given in the following table (lower numbers are better) -- note that team six did not submit their policy/method for evlaution but a written report only:
+
+|    Team ID    |    Cost of control    |    Control smoothness    |    Cl bound violations    |    Cl bound violations fairness    |     Infection risk (avg. over all contamination events)    |
+|    :---:    |    :---:    |    :---:    |    :---:    |    :---:    |    :---:    |
+|    [1](AI4DWC-25_paper_1.pdf)    |    31048978.0    |    5.937    |    0.103    |    0.177    |    6.656    |
+|    [5](AI4DWC-25_paper_5.pdf)    |    209191.72    |    0    |    0.171    |    0.199    |    9.082    |
+|    [3](AI4DWC-25_paper_3.pdf)    |    19098485.02    |    50.36    |    0.150    |    0.331    |    8.067    |
+|    [2](AI4DWC-25_paper_2.pdf)    |    0    |    0    |    0.171    |    0.199    |    9.085    |
+|    [4](AI4DWC-25_paper_4.pdf)    |    0    |    0    |    0.171    |    0.199    |    9.085    |
+|    [6](AI4DWC-25_paper_6.pdf)    |    -    |    -    |    -    |    -    |    -    |
+
+The test scenarion can be downloaded [here](https://filedn.com/lumBFq2P9S74PNoLPWtzxG4/IJCAI25-Challenge/TestScenario.tar.gz). For running the evaluation, you could simply replace the training scenario number 10 or you could manually load the test scenario as follows:
+
+```python
+with WaterChlorinationEnv(**load_test_scenario()) as env:
+    my_policy = load_policy(env)
+
+    print(evaluate(my_policy, env))
+
+
+def load_test_scenario() -> dict:
+    folder_test = "TestScenario"
+    f_inp_in = os.path.join(folder_test, "CY-DBP_competition_stream_competition_365days.inp")
+    f_msx_in = os.path.join(folder_test, "AI_challenge365days.msx")
+    f_in_contamination_metadata = os.path.join(folder_test, "contamination_metadata_365days.mat")
+    f_in_streams_data = os.path.join(folder_test, "Stream_demands_competition_365days.mat")
+
+    sensor_config = None
+    with ScenarioSimulator(f_inp_in=f_inp_in, f_msx_in=f_msx_in) as scenario:
+        scenario.set_flow_sensors(["5", "p-1144"])
+        scenario.set_bulk_species_node_sensors({"CL2": ["dist423", "dist225", "dist989", "dist1283", "dist1931",
+                                                        "dist342", "dist275", "dist354", "dist885", "dist485",
+                                                        "dist631", "dist1332", "dist1607", "dist1459", "dist1702",
+                                                        "dist1975", "dist1903"]})
+
+        sensor_config = scenario.sensor_config
+
+    cl_injection_nodes = ["dist423", "dist225", "dist989", "dist1283", "dist1931"]
+    cl_injection_patterns = ["CL2PAT1", "CL2PAT2", "CL2PAT3", "CL2PAT4", "CL2PAT5"]
+    return {"scenario_config": ScenarioConfig(f_inp_in=f_inp_in, f_msx_in=f_msx_in,
+                                              sensor_config=sensor_config),
+            "action_space": [SpeciesInjectionAction(species_id="CL2", node_id=node_id,
+                                                    pattern_id=pat_id,
+                                                    source_type_id=ToolkitConstants.EN_MASS,
+                                                    upper_bound=10000.)
+                                                    for node_id, pat_id in zip(cl_injection_nodes,
+                                                                               cl_injection_patterns)],
+            "f_in_contamination_metadata": f_in_contamination_metadata,
+            "f_in_streams_data": f_in_streams_data,
+            "f_hyd_file_in": None,
+            "hyd_scada_in": None}
+```
+
 
 ## Update 30th July
 
@@ -46,9 +99,9 @@ All deadlines are AoE.
 
 **Submission deadline:** 4th August, 2025 &#10004;
 
-**Notification of results and publication of test set:** 11th August, 2025
+**Notification of results and publication of test set:** 16th August, 2025
 
-**Presentation of results at IJCAI 2025:** Montreal, 16th -- 22nd August, 2025
+**Presentation of results at IJCAI 2025:** Montreal, 19th August, 2025 -- location: booth 7
 
 
 ## Evaluation

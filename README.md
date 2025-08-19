@@ -101,7 +101,7 @@ All deadlines are AoE.
 
 **Notification of results and publication of test set:** 16th August, 2025
 
-**Presentation of results at IJCAI 2025:** Montreal, 19th August, 2025 -- location: booth 7
+**Presentation of results at IJCAI 2025:** Montreal, 19th August, 2025 -- location: booth 7 (slides available [here](slides.pdf))
 
 
 ## Evaluation

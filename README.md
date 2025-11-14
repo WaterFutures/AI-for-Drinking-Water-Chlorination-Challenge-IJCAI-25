@@ -99,9 +99,9 @@ All deadlines are AoE.
 
 **Submission deadline:** 4th August, 2025 &#10004;
 
-**Notification of results and publication of test set:** 16th August, 2025
+**Notification of results and publication of test set:** 16th August, 2025 &#10004;
 
-**Presentation of results at IJCAI 2025:** Montreal, 19th August, 2025 -- location: booth 7 (slides available [here](slides.pdf))
+**Presentation of results at IJCAI 2025:** Montreal, 19th August, 2025 -- location: booth 7 (slides available [here](slides.pdf)) &#10004;
 
 
 ## Evaluation
@@ -200,7 +200,7 @@ All evaluation metrics are already implemented in the function `evaluate()` in t
 # Create and fit policy
 my_policy = ...
 
-# Load load one environment for evaluation
+# Load one environment for evaluation
 env = ....
 
 # Evaluate policy

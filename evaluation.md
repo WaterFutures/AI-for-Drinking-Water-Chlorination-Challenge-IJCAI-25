@@ -66,17 +66,17 @@ $$
 \frac{1}{T-1}\sum_{t=1}^{T-1} |u_v(t) - u_v(t+1)|
 $$
 
-In this challenge, we have two chlorine injection pumps, $v_1$ and $v_2$. Consequently, we take the maximum over their average rate of change as the final evaluation, which is to be minimized:
+In this challenge, we have five chlorine injection pumps, $v_1$ to $v_5$. Consequently, we take the maximum over their average rate of change as the final evaluation, which is to be minimized:
 
 $$
-\underset{v1, v2}{\max}\, \frac{1}{T-1}\sum_{t=1}^{T-1} |u_v(t) - u_v(t+1)|
+\underset{v \in \{v_1, .., v_5\}}{\max}\, \frac{1}{T-1}\sum_{t=1}^{T-1} |u_v(t) - u_v(t+1)|
 $$
 
 
 ## Cost of Control
 
-In this challenge, we model the cost of control, which is to be minimized, as the amount of injected chlorine at the two chlorine injection pumps $v_1$ and $v_2$:
+In this challenge, we model the cost of control, which is to be minimized, as the amount of injected chlorine at the five chlorine injection pumps $v_1$ to $v_5$:
 
 $$
-\sum_{t=1}^{T} u_{v_1}(t) + u_{v_2}(t)
+\sum_{t=1}^{T} \sum_{j=1}^5 u_{v_j}(t)
 $$

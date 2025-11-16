@@ -11,23 +11,19 @@ slightly different dynamics in order to evaluate the generalization.
 
 ## Violations of Chlorine Concentration Bounds
 
-In order to ensure safe drinking water at all times, the chlorine concentration at junctions must be within a given bound -- i.e., to low chlorine concentrations can not ensure safe drinking water, whereas too high chlorine concentrations are known to be unhealthy for the human body. Usually, those bounds are specified in legal regulations.
+In order to ensure safe drinking water at all times, the chlorine concentration at junctions must be within a given bound -- i.e., too low chlorine concentrations can not ensure safe drinking water, whereas too high chlorine concentrations are known to be unhealthy for the human body. Usually, those bounds are specified in legal regulations.
 
-For each junction $v$, the chlorine concentration $c_v$ must be within a given interval $[a,b]$ at all times:
-
+Formally, for each junction $v\in V$ in the network, the chlorine concentration $c_v$ must be within a given interval $[a,b]$ at all discrete times $T = \{1, ..., T\}$:
 $$
-\frac{1}{T} \sum_{t=1}^T \mathbf{1}_{[a,b]}(c_v(t))
+  \frac{1}{T} \sum_{t=1}^T \mathbf{1}_{[a,b]}(c_v(t))  
 $$
+where $\mathbf{1}_{[a,b]}(c_v(t))=1$ iff $c_v(t)\in[a,b]$ and zero otherwise.
 
-where $\mathbf{1}_{[a,b]}(c_v(t))=1$ iff $c_v(t)\in[a,b]$.
-
-We aggregate over all junctions $V$ by taking the average:
-
+We aggregate the chlorine bound violations over all junctions $V$ by taking the average of Equation~\eqref{eq:chlorineresidual}:
 $$
-\frac{1}{T|V|}\sum_{v\in V} \sum_{t=1}^T \mathbf{1}_{[a,b]}(c_v(t))
+s_v := \frac{1}{T|V|}\sum_{v\in V} \sum_{t=1}^T \mathbf{1}_{[a,b]}(c_v(t)).
 $$
-
-In this challenge, we use $[0.2, 0.4]\text{mg/l}$ as desired chlorine concentration bounds.
+In the competition, we set $[0.2, 0.4]\text{mg/L}$ as the desired chlorine concentration bounds at every junction, which are inspired by regulations
 
 
 ## Fairness
@@ -43,19 +39,6 @@ where $s_i$ refers to the quantity of interest at junction $i$ -- i.e., either t
 By this, we evaluate some form of fairness where we evaluate the worst-case of how different all junctions (i.e., consumers) or contamination event locations are treated.
 
 
-## Infection Risk
-
-The infection risk is an evaluation metric that quantifies the public health impact by estimating the probability of an individual getting ill after exposure to pathogens during a contamination event. Following the Quantitative Microbial Risk Assessment (QMRA) framework, it combines the pathogen concentration, the water consumption behavior, and finally dose-response modeling. The dose for each individual is calculated by multiplying the pathogen concentration in drinking water by the ingested volume across multiple daily consumption events, totaling up to 1 liter per person per day. For enterovirus, the infection probability is derived using an exponential dose-response model: 
-
-$$
-Risk = 1 - \exp(-r * Dose)
-$$
-
-with $r = 0.014472$ representing the pathogen-specific infectivity. The infection risk is then defined as the ratio of expected infections to the total population. This metric evaluates how well the controller prevents (or minimizes) health risks during an (undetected) contamination event.
-
-Note that in contrast to the other evaluation metrics, the infection risk is computed for each contamination event only.
-
-
 ## Smoothness of Chlorine Injection
 
 From an operational point of view, it is unhealthy or even unrealistic for chlorine injection pumps to have large changes/jumps in the injection rate. We therefore evaluate the *smoothness* of the chlorine injection over time.
@@ -66,7 +49,7 @@ $$
 \frac{1}{T-1}\sum_{t=1}^{T-1} |u_v(t) - u_v(t+1)|
 $$
 
-In this challenge, we have five chlorine injection pumps, $v_1$ to $v_5$. Consequently, we take the maximum over their average rate of change as the final evaluation, which is to be minimized:
+In this challenge, we have five chlorine injection pumps ($v_1$ to $v_5$. ) to be operated. To properly consider all of them and to avoid any ``averaging-out'' effects, we take the maximum over their average rate of change as the final evaluation, which is to be minimised:
 
 $$
 \underset{v \in \{v_1, .., v_5\}}{\max}\, \frac{1}{T-1}\sum_{t=1}^{T-1} |u_v(t) - u_v(t+1)|
@@ -80,3 +63,16 @@ In this challenge, we model the cost of control, which is to be minimized, as th
 $$
 \sum_{t=1}^{T} \sum_{j=1}^5 u_{v_j}(t)
 $$
+
+
+## Infection Risk
+
+The infection risk is an evaluation metric that quantifies the public health impact by estimating the probability of an individual getting ill after exposure to pathogens during a contamination event. Following the Quantitative Microbial Risk Assessment (QMRA) framework, it combines the pathogen concentration, the water consumption behavior, and finally dose-response modeling. The dose for each individual is calculated by multiplying the pathogen concentration in drinking water by the ingested volume across multiple daily consumption events, totaling up to 1 liter per person per day. For enterovirus, the infection probability is derived using an exponential dose-response model: 
+
+$$
+Risk = 1 - \exp(-r * Dose)
+$$
+
+with $r = 0.014472$ representing the pathogen-specific infectivity. The infection risk is then defined as the ratio of expected infections to the total population. This metric evaluates how well the controller prevents (or minimizes) health risks during an (undetected) contamination event.
+
+Note that in contrast to the other evaluation metrics, the infection risk is computed for each contamination event only.

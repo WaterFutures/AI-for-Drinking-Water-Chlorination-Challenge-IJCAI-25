@@ -7,7 +7,7 @@ from copy import deepcopy
 import numpy as np
 from epyt_control.envs import EpanetMsxControlEnv
 from epyt_control.envs.actions import SpeciesInjectionAction
-from epyt_flow.simulation import ScadaData, SensorConfig, ScenarioConfig
+from epyt_flow.simulation import ScadaData, SensorConfig, ScenarioConfig, EpanetConstants
 from epyt_flow.utils import to_seconds
 
 
@@ -35,14 +35,18 @@ class WaterChlorinationEnv(EpanetMsxControlEnv):
 
         # Set constant chlorine injection
         #self._scenario_sim.epanet_api.setMSXPattern("CL2PAT", [3000])
-        self._scenario_sim.epanet_api.setMSXPattern("CL2PAT1", [500])
-        self._scenario_sim.epanet_api.setMSXPattern("CL2PAT2", [10])
-        self._scenario_sim.epanet_api.setMSXPattern("CL2PAT3", [10])
-        self._scenario_sim.epanet_api.setMSXPattern("CL2PAT4", [10])
-        self._scenario_sim.epanet_api.setMSXPattern("CL2PAT5", [10])
+        def setMSXPattern(pat_id, pat):
+            pattern_idx = self._scenario_sim.epanet_api.MSXgetindex(EpanetConstants.MSX_PATTERN, pat_id)
+            self._scenario_sim.epanet_api.MSXsetpattern(pattern_idx, pat, len(pat))
+
+        setMSXPattern("CL2PAT1", [500])
+        setMSXPattern("CL2PAT2", [10])
+        setMSXPattern("CL2PAT3", [10])
+        setMSXPattern("CL2PAT4", [10])
+        setMSXPattern("CL2PAT5", [10])
 
         # Skip first three days to give the network time to settle a proper initial state
-        time_step = self._scenario_sim.epanet_api.getTimeHydraulicStep()
+        time_step = self._scenario_sim.epanet_api.get_hydraulic_time_step()
         n_steps_to_skip = int(to_seconds(days=3) / time_step)
 
         current_scada_data = None

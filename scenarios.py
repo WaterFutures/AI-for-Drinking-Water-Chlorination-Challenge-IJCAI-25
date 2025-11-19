@@ -2,7 +2,7 @@
 This module contains the scenarios for the
 "1st AI for Drinking Water Chlorination Challenge" @ IJCAI-2025.
 """
-from epyt_flow.simulation import ScenarioSimulator, ScenarioConfig, ToolkitConstants, ScadaData
+from epyt_flow.simulation import ScenarioSimulator, ScenarioConfig, EpanetConstants, ScadaData
 from epyt_control.envs.actions import SpeciesInjectionAction
 from epyt_flow.utils import download_if_necessary
 
@@ -89,7 +89,7 @@ def load_scenario(scenario_id: int, use_precomputed_hydraulics: bool = True) -> 
                                               sensor_config=sensor_config),
             "action_space": [SpeciesInjectionAction(species_id="CL2", node_id=node_id,
                                                     pattern_id=pat_id,
-                                                    source_type_id=ToolkitConstants.EN_MASS,
+                                                    source_type_id=EpanetConstants.EN_MASS,
                                                     upper_bound=10000.)
                                                     for node_id, pat_id in zip(cl_injection_nodes,
                                                                                cl_injection_patterns)],

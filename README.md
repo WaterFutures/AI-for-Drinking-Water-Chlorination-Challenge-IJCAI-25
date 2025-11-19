@@ -54,7 +54,7 @@ def load_test_scenario() -> dict:
                                               sensor_config=sensor_config),
             "action_space": [SpeciesInjectionAction(species_id="CL2", node_id=node_id,
                                                     pattern_id=pat_id,
-                                                    source_type_id=ToolkitConstants.EN_MASS,
+                                                    source_type_id=EpanetConstants.EN_MASS,
                                                     upper_bound=10000.)
                                                     for node_id, pat_id in zip(cl_injection_nodes,
                                                                                cl_injection_patterns)],

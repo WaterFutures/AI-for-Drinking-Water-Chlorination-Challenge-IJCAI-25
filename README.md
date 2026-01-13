@@ -262,7 +262,7 @@ Alternatively, you may use the following BibTex entry:
         author = {André Artelt and Luca Hermes, Janine Strotherm and Barbara Hammer and Stelios G. Vrachimis and Marios S. Kyriakou, Demetrios G. Eliades and Marios M. Polycarpou and Sotirios Paraskevopoulos and Stefanos Vrochidis and Riccardo Taormina and Dragan Savic and Phoebe Koundouri},
         title = {{1st AI for Drinking Water Chlorination Challenge}},
         year = {2025},
-        publisher = {34th International Joint Conference on Artificial Intelligence (IJCAI)}
+        publisher = {34th International Joint Conference on Artificial Intelligence (IJCAI)},
         howpublished = {\url{https://github.com/WaterFutures/AI-for-Drinking-Water-Chlorination-Challenge-IJCAI-25}}
     }
 ```

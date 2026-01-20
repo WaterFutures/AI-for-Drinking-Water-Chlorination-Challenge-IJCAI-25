@@ -259,7 +259,7 @@ Artelt, A., Hermes, L., Strotherm, J., Hammer, B., Vrachimis, S. G., Kyriakou, M
 Alternatively, you may use the following BibTex entry:
 ```
 @misc{github:ai4drinkwaterchlorinationchallenge25,
-        author = {André Artelt and Luca Hermes, Janine Strotherm and Barbara Hammer and Stelios G. Vrachimis and Marios S. Kyriakou, Demetrios G. Eliades and Marios M. Polycarpou and Sotirios Paraskevopoulos and Stefanos Vrochidis and Riccardo Taormina and Dragan Savic and Phoebe Koundouri},
+        author = {André Artelt and Luca Hermes and Janine Strotherm and Barbara Hammer and Stelios G. Vrachimis and Marios S. Kyriakou and Demetrios G. Eliades and Marios M. Polycarpou and Sotirios Paraskevopoulos and Stefanos Vrochidis and Riccardo Taormina and Dragan Savic and Phoebe Koundouri},
         title = {{1st AI for Drinking Water Chlorination Challenge}},
         year = {2025},
         publisher = {34th International Joint Conference on Artificial Intelligence (IJCAI)},

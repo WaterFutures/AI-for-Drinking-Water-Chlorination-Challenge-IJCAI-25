@@ -124,6 +124,10 @@ More details about the evaluation metrics can be found [here](evaluation.md).
 
 Participants are provided with a set of scenario configurations/environments, constituting the same water distribution network but with varying contamination events and uncertainties. A Python interface, which abstracts away from all water distribution system details, is provided for a step-by-step simulation of these scenario configurations. This Python interface is implemented utilizing the [EPyT-Control package](https://github.com/WaterFutures/EPyT-Control), which is fully compatible with the [Gymnasium interface](https://gymnasium.farama.org/) and integrates the popular [Stable-Baselines3 package](https://stable-baselines3.readthedocs.io/en/master/). 
 
+### Code for generating additional scenarios
+
+After the competition was over, we not only released the [MATLAB code](MATLAB/) for generating the scenarios, but also a [Python script](additional_scenario_generator.py) for generating additional scenarios with customized contamination events.
+
 ### Requirements
 
 All requirements are listed in [REQUIREMENTS.txt](REQUIREMENTS.txt).

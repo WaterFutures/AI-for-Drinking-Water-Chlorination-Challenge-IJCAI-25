@@ -133,6 +133,13 @@ After the competition was over, we not only released the [MATLAB code](MATLAB/) 
 All requirements are listed in [REQUIREMENTS.txt](REQUIREMENTS.txt).
 Please note that EPyT-Control builds on top of [EPyT-Flow](https://github.com/WaterFutures/EPyT-Flow) which comes with pre-compiled shared libraries for running the hydraulic and water quality simulations. In rare cases those might cause compatibility issues -- in those cases, as well as in order to fully make use of your local CPU, you may want to re-compile those libraries as described in the [documentation](hhttps://epyt-flow.readthedocs.io/en/stable/installation.html).
 
+### Upgrade to EPyT-Flow v0.16.0
+
+If you are upgrading to EPyT-Flow v0.16.0, you might receive an error when loading the pre-computed hydraulics of a scenario.
+This is due to a change in the file format that was introduced in EPyT-Flow v0.16.0.
+
+You can resolve this error by either setting `use_precomputed_hydraulics=False` when calling `load_scenario()`, or by removing all `.epytflow_scada_data` files (the new files will be downloaded automatically).
+
 ### The environment
 
 The provided environments are derived from the [WaterChlorinationEnv](env.py) class, which mimics the [Gymnasium Environment](https://gymnasium.farama.org/api/env/) interface. Note that the `WaterChlorinationEnv` class is an instantiation of [EpanetMsxControlEnv](https://epyt-control.readthedocs.io/en/stable/epyt_control.envs.html#epyt_control.envs.advanced_quality_control_env.EpanetMsxControlEnv) from the [EPyT-Control package](https://github.com/WaterFutures/EPyT-Control).
